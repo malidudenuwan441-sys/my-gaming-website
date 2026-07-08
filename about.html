@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+
+    <style>
+        body {
+            background-color: #0d0d11;
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        nav a {
+            color: #ff3333;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff3333;
+        }
+
+        .content-box {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: rgba(26, 26, 34, 0.85);
+            /* Transparent කළා වැස්ස පේන්න */
+            border: 2px solid #ff3333;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(255, 51, 51, 0.2);
+        }
+
+        h1 {
+            color: #ff3333;
+            text-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+        }
+
+        /* About List Styles */
+        .about-list {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .about-list li {
+            padding: 12px;
+            margin: 10px 0;
+            background: rgba(13, 13, 17, 0.9);
+            border-left: 3px solid #ff3333;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.6;
+            transition: 0.3s;
+        }
+
+        .about-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.2);
+        }
+
+        /* 🚀 Heading එකට Drop-In Animation එක */
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+            animation: dropIn 1.5s ease-out;
+            margin-top: 0;
+        }
+
+        @keyframes dropIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 🚀 මැද තියෙන .form-box එකට Slide-In Animation එක */
+        .form-box {
+            animation: slideIn 1.2s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* 🚀 ලැයිස්තුවේ තියෙන හැම කරුණක්ම වමේ ඉඳන් දකුණට ඇනිමේට් කරන්න */
+        .about-list li {
+            animation: slideInLeft 1s ease-out both;
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+                /* වමෙන් පටන් ගන්න */
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+                /* ඔරිජිනල් තැනට එන්න */
+            }
+        }
+
+        /* ⏱️ එක පිටුපස එක පිළිවෙලට එන්න (Delay එකක් එකතු කිරීම) */
+        .about-list li:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .about-list li:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .about-list li:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="matrix"></canvas>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="about.html">About</a> |
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <hr style="border: 0.5px solid #222; margin: 30px 0;">
+
+    <div class="content-box">
+        <h1>මං ගැන විස්තරේ 🙋‍♂️</h1>
+        <p style="color: #ccc; font-style: italic;">Welcome to my digital space!</p>
+
+        <hr style="border: 0.5px solid #ff3333; width: 50px; margin: 20px auto;">
+
+        <ul class="about-list">
+            <li>🚀 <strong>Developer & Tech Enthusiast:</strong> මම Node.js සහ Python පාවිච්චි කරලා WhatsApp Bots වගේම
+                විවිධ Web Applications නිර්මාණය කරන්න ගොඩක් ආස කරන කෙනෙක්.</li>
+            <li>🎮 <strong>Hardcore Gamer:</strong> Coding විතරක් නෙවෙයි, මම Blood Strike, GTA V, Forza වගේ Games
+                සෙල්ලම් කරන්නත් පට්ටම ආසයි.</li>
+            <li>💻 <strong>Future Cyber Security Student:</strong> තාක්ෂණය පැත්තෙන් ඉස්සරහටම යන්න අලුත් දේවල් හැමදාම
+                ඉගෙන ගන්නවා.</li>
+        </ul>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const characters = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const charArray = characters.split("");
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        for (let x = 0; x < columns; x++) { drops[x] = 1; }
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#ff3333";
+            ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) { drops[i] = 0; }
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+</html>

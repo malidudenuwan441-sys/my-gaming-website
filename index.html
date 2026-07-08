@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>මගේ පළවෙනි වෙබ්සයිට් එක!</title>
+
+    <style>
+        /* 1. Core Styles (Black & Neon Red Gaming Theme) */
+        body {
+            background-color: #0d0d11; /* Deep Black */
+            color: #ffffff; /* සුදු පාට අකුරු */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* කැන්වස් එක පසුබිමට ලොක් කිරීම */
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* හැමදේටම යටින් */
+        }
+
+        /* 2. Navigation Menu */
+        nav a {
+            color: #ff3333; /* Neon Red Links */
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff3333; /* රතු පාටින් Glow වෙනවා */
+        }
+
+        /* Heading Animation */
+        h1 {
+            color: #ff3333;
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+            animation: dropIn 1.5s ease-out;
+        }
+
+        @keyframes dropIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 3. Flex Container (Black/Red Gaming Box) */
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: rgba(26, 26, 34, 0.85); /* Matrix වැස්ස යාන්තමට පේන Transparent Background එකක් */
+            border: 2px solid #ff3333; /* රතු පාට බෝඩර් එකක් */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(255, 51, 51, 0.2);
+            animation: slideIn 1.2s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .flex-text {
+            text-align: left;
+            max-width: 400px;
+        }
+
+        .flex-text h3 {
+            color: #ff3333;
+        }
+
+        /* Image Hover Animation */
+        img {
+            border-radius: 12px;
+            border: 2px solid #ff3333;
+            transition: 0.5s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 30px rgba(255, 51, 51, 0.8);
+        }
+
+        /* 4. Pure Red Action Button */
+        .main-btn {
+            background-color: #ff3333;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .main-btn:hover {
+            background-color: #e60000;
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #ff3333, 0 0 40px #ff3333;
+        }
+
+        /* 5. Social Buttons Layout */
+        .social-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white !important;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+        }
+
+        /* සෝෂල් බටන්ස් වල පාටවල් */
+        .google { background-color: #4285f4; }
+        .google:hover { box-shadow: 0 0 15px #4285f4; }
+
+        .tiktok { background-color: #010101; border: 1px solid #ff0050; }
+        .tiktok:hover { box-shadow: 0 0 15px #ff0050; }
+
+        .youtube { background-color: #ff0000; }
+        .youtube:hover { box-shadow: 0 0 15px #ff0000; }
+
+        .facebook { background-color: #1877f2; }
+        .facebook:hover { box-shadow: 0 0 15px #1877f2; }
+
+        .fitgirl { background-color: #4b0082; border: 1px solid #ff3333; }
+        .fitgirl:hover { box-shadow: 0 0 15px #ff3333; }
+
+        .telegram { background-color: #24a1de; }
+        .telegram:hover { box-shadow: 0 0 15px #24a1de; }
+
+        .instagram { background-color: #e1306c; }
+        .instagram:hover { box-shadow: 0 0 15px #e1306c; }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .flex-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .flex-text {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="matrix"></canvas>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="about.html">About</a> |
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <hr style="border: 0.5px solid #222; margin: 30px 0;">
+
+    <h1>WELCOME TO MY WEBSITE 🚀</h1>
+    <p>මෙන්න මම HTML, CSS & JS වලින් හදපු පළවෙනි වෙබ් පිටුව.</p>
+
+    <div class="flex-container">
+        <img src="https://nielseniq.com/wp-content/uploads/sites/4/2022/11/gaming-keyboard-mouse-controller-headphones.jpg?w=1024"
+            alt="Gaming Setup" width="350">
+
+        <div class="flex-text">
+            <h3>මගේ Gaming Corner එක 🎮</h3>
+            <p>මේ තමයි මම ආසම දේවල් එකතු කරලා හදපු මගේ පළවෙනි වෙබ් පිටුව. HTML, CSS සහ JS පාවිච්චි කරලා මේක ලස්සනට ඩිසයින් කරලා තියෙනවා.</p>
+        </div>
+    </div>
+
+    <br>
+    <button class="main-btn" onclick="alert('අඩෝ වැඩේ මරුනෙ! 👋')">මාව ක්ලික් කරන්න!</button>
+    <br><br>
+
+    <hr style="border: 0.5px solid #222; margin: 40px 0;">
+
+    <div class="social-container">
+        <a href="https://www.google.com" target="_blank" class="social-btn google">Google</a>
+        <a href="https://www.tiktok.com" target="_blank" class="social-btn tiktok">TikTok</a>
+        <a href="https://www.youtube.com" target="_blank" class="social-btn youtube">YouTube</a>
+        <a href="https://www.facebook.com" target="_blank" class="social-btn facebook">Facebook</a>
+        <a href="https://fitgirl-repacks.site" target="_blank" class="social-btn fitgirl">FitGirl</a>
+        <a href="https://t.me" target="_blank" class="social-btn telegram">Telegram</a>
+        <a href="https://www.instagram.com" target="_blank" class="social-btn instagram">Instagram</a>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const charArray = characters.split("");
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#ff3333"; /* මෙතන මම රතු පාට දැම්මා (#ff3333) */
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+</html>
