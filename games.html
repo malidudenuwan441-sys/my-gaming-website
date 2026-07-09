@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Arcade - Games</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3408/3408506.png">
+
+    <style>
+        body {
+            background-color: #0d0d11;
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        nav a {
+            color: #ff3333;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff3333;
+        }
+
+        h1 {
+            color: #ff3333;
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+            animation: dropIn 1.5s ease-out;
+            margin-top: 0;
+        }
+
+        @keyframes dropIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 🕹️ Arcade Layout (Games පැත්තෙන් පැත්තට පෙන්වීමට) */
+        .arcade-zone {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
+            animation: slideIn 1.2s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 📦 Common Game Box Styling */
+        .game-card {
+            background: rgba(20, 20, 27, 0.9);
+            border: 2px dashed #ff3333;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+            width: 320px;
+            box-sizing: border-box;
+        }
+
+        /* --- TIC TAC TOE STYLES --- */
+        .diff-selector {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .diff-btn {
+            background: #0d0d11;
+            color: #888;
+            border: 1px solid #333;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        .diff-btn:hover {
+            color: #fff;
+            border-color: #ff3333;
+        }
+
+        .diff-btn.active {
+            background: #ff3333;
+            color: #fff;
+            border-color: #ff3333;
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+        }
+
+        #status-turn,
+        #score-board {
+            font-size: 15px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .ttt-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            background: #050508;
+            border: 1px solid #333;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .cell:hover {
+            border-color: #ff3333;
+            background: rgba(255, 51, 51, 0.05);
+        }
+
+        .cell.X {
+            color: #ffffff;
+            text-shadow: 0 0 5px #fff;
+        }
+
+        .cell.O {
+            color: #ff3333;
+            text-shadow: 0 0 10px #ff3333;
+        }
+
+        .reset-btn {
+            background: transparent;
+            color: #ff3333;
+            border: 1px solid #ff3333;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .reset-btn:hover {
+            background: #ff3333;
+            color: white;
+            box-shadow: 0 0 15px #ff3333;
+        }
+
+        /* --- SNAKE GAME STYLES --- */
+        #snakeGame {
+            background: #050508;
+            border: 1px solid #ff3333;
+            display: block;
+            margin: 0 auto;
+            box-shadow: inset 0 0 10px rgba(255, 51, 51, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="matrix"></canvas>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="about.html">About</a> |
+        <a href="games.html">Games</a> |
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <hr style="border: 0.5px solid #222; margin: 30px 0;">
+
+    <h1>🎯 MY ARCADE ZONE 🎯</h1>
+    <p style="color: #ccc; font-style: italic;">Take a break and beat the high scores!</p>
+
+    <div class="arcade-zone">
+
+        <!-- GAME 1: TIC-TAC-TOE -->
+        <div class="game-card">
+            <h3 style="color: #ff3333; margin-top:0; margin-bottom: 10px;">🎮 TIC-TAC-TOE 🎮</h3>
+            <div class="diff-selector">
+                <button class="diff-btn active" onclick="setDifficulty('easy')">Easy</button>
+                <button class="diff-btn" onclick="setDifficulty('medium')">Medium</button>
+                <button class="diff-btn" onclick="setDifficulty('hard')">Hard</button>
+            </div>
+            <div id="status-turn">ඔයාගේ වාරය (X)</div>
+            <div class="ttt-board">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+            <button class="reset-btn" onclick="resetTTT()">Restart Game</button>
+        </div>
+
+        <!-- GAME 2: SNAKE GAME -->
+        <div class="game-card">
+            <h3 style="color: #ff3333; margin-top:0; margin-bottom: 10px;">🐍 RETRO SNAKE 🐍</h3>
+            <div id="score-board">Score: <span id="score">0</span></div>
+            <canvas id="snakeGame" width="260" height="260"></canvas>
+            <p style="color: #888; font-size: 11px; margin-top: 10px; margin-bottom:0;">Use W, A, S, D or Arrow Keys!
+            </p>
+        </div>
+
+    </div>
+
+    <!-- 🧠 JAVASCRIPT CODES -->
+    <script>
+        // 1. MATRIX BACKGROUND CODE
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const characters = "アァカサタナハマ야0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const charArray = characters.split("");
+        const fontSize = 16; const columns = canvas.width / fontSize;
+        const drops = []; for (let x = 0; x < columns; x++) { drops[x] = 1; }
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#ff3333"; ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) { drops[i] = 0; }
+                drops[i]++;
+            }
+        }
+    </script>
+    <script src="ttt.js"></script>
+    <script src="snake.js"></script>
+</body>
+
+</html>
